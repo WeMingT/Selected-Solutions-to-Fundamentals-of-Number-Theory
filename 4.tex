@@ -1,0 +1,270 @@
+\section{第四周作业}
+\subsection*{第三章}
+
+\begin{enumerate}
+    \item[1] 试证 $\prod_p \frac{p^2}{p^2-1}=\frac{\pi^2}{6}$ ．
+    \begin{proof}
+        考虑 Riemann zeta 函数 $\zeta(s)$ 的 Euler 乘积公式：
+        \[ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_p \left(1 - \frac{1}{p^s}\right)^{-1} \]
+        其中乘积遍历所有素数 $p$，该公式对于 $\text{Re}(s) > 1$ 成立。
+        
+        令 $s=2$，我们知道 $\zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$。
+        将 $s=2$ 代入 Euler 乘积公式，得到：
+        \[ \zeta(2) = \prod_p \left(1 - \frac{1}{p^2}\right)^{-1} = \frac{\pi^2}{6} \]
+        
+        现在考察题目中给出的无穷乘积：
+        \begin{align*}
+            \prod_p \frac{p^2}{p^2-1} &= \prod_p \frac{1}{\frac{p^2-1}{p^2}} \\
+            &= \prod_p \frac{1}{1 - \frac{1}{p^2}} \\
+            &= \prod_p \left(1 - p^{-2}\right)^{-1}
+        \end{align*}
+        
+        比较可知，该乘积正是 $\zeta(2)$ 的 Euler 乘积表示。
+        因此，
+        \[ \prod_p \frac{p^2}{p^2-1} = \zeta(2) = \frac{\pi^2}{6} \]
+        证毕。
+    \end{proof}
+    \item[2] 试证级数 $\sum_p \frac{1}{p}$ 发散．
+
+    \begin{proof}
+        采用反证法。假设级数 $\sum_p \frac{1}{p}$ 收敛。根据 Cauchy 准则，这意味着对于任意 $\epsilon > 0$，存在 $N$ 使得对所有 $n > m \ge N$，有 $\sum_{k=m+1}^n \frac{1}{p_k} < \epsilon$。特别地，这意味着尾项级数 $\sum_{k=K+1}^\infty \frac{1}{p_k}$ 对于任意 $K$ 都是收敛的（作为 $n \to \infty$ 的极限）。
+        
+        设 $K$ 为任意正整数。考虑所有素因子都大于 $p_K$ 的正整数集合 $M_K = \{m \in \mathbb{N} \mid \forall p \text{ s.t. } p|m, p > p_K\}$。
+        由于 $\sum_{k=K+1}^\infty \frac{1}{p_k}$ 收敛（由假设），根据无穷乘积与级数的关系，无穷乘积 $\prod_{k=K+1}^\infty (1 - \frac{1}{p_k})$ 收敛到一个正值 $P_K' > 0$。
+
+        因此，Euler 乘积 $\sum_{m \in M_K} \frac{1}{m} = \prod_{k=K+1}^\infty (1 - \frac{1}{p_k})^{-1} = \frac{1}{P_K'}$ 收敛到一个有限值 $V_K$。
+        
+        现在，令 $P_K = p_1 p_2 \cdots p_K$ 为前 $K$ 个素数的乘积。考虑形如 $1 + q P_K$ 的整数，其中 $q = 1, 2, 3, \dots$。
+
+        任何 $1 + q P_K$ 的素因子 $p$ 必须满足 $p \nmid P_K$，否则 $p \mid q P_K$ 且 $p \mid (1 + q P_K)$，这意味着 $p \mid 1$，这是不可能的。
+
+        因此，$1 + q P_K$ 的所有素因子都大于 $p_K$，即 $1 + q P_K \in M_K$ 对所有 $q \ge 1$ 成立。
+        
+        于是，我们有级数不等式：
+        \[ \sum_{q=1}^\infty \frac{1}{1 + q P_K} \le \sum_{m \in M_K} \frac{1}{m} = V_K \]
+        这表明，如果 $\sum_p \frac{1}{p}$ 收敛，则级数 $\sum_{q=1}^\infty \frac{1}{1 + q P_K}$ 必须收敛。
+        
+        然而，我们使用极限比较判别法，将级数 $\sum_{q=1}^\infty \frac{1}{1 + q P_K}$ 与发散的调和级数 $\sum_{q=1}^\infty \frac{1}{q}$ 进行比较：
+        \[ \lim_{q \to \infty} \frac{\frac{1}{1 + q P_K}}{\frac{1}{q}} = \lim_{q \to \infty} \frac{q}{1 + q P_K} = \frac{1}{P_K} \]
+        由于 $P_K = p_1 \cdots p_K \ge 2$，极限值 $\frac{1}{P_K}$ 是一个正的有限常数。
+
+        因为调和级数 $\sum_{q=1}^\infty \frac{1}{q}$ 发散，根据极限比较判别法，级数 $\sum_{q=1}^\infty \frac{1}{1 + q P_K}$ 也必须发散。
+        
+        这与我们从“$\sum_p \frac{1}{p}$ 收敛”这一假设推导出的结论“$\sum_{q=1}^\infty \frac{1}{1 + q P_K}$ 收敛”相矛盾。
+        
+        因此，最初的假设“$\sum_p \frac{1}{p}$ 收敛”必定是错误的。这意味着级数 $\sum_p \frac{1}{p}$ 不满足 Cauchy 准则，故该级数发散。
+        证毕。
+    \end{proof}
+
+    \item[3] 试证数列 $\{6 n-1\}$ 中包含无限个素数．
+    \begin{proof}
+        采用反证法。假设形式为 $6n-1$ 的素数只有有限个，设为 $p_1, p_2, \ldots, p_r$。
+        考虑整数 $N = 6(p_1 p_2 \cdots p_r) - 1$。
+        
+        首先，$N > 1$。$N$ 的素因子分解式中，所有素因子 $p$ 必满足 $p \nmid 6$，即 $p$ 不能是 2 或 3。
+        因此，$N$ 的任何素因子 $p$ 必形如 $6k+1$ 或 $6k-1$。
+        
+        注意到 $N = 6(p_1 p_2 \cdots p_r) - 1 \equiv -1 \pmod 6$。
+        
+        如果 $N$ 的所有素因子都形如 $6k+1$，那么它们的乘积 $N$ 也必然形如 $6k+1$。
+        （因为 $(6k_1+1)(6k_2+1) = 36k_1k_2 + 6k_1 + 6k_2 + 1 = 6(6k_1k_2+k_1+k_2)+1 \equiv 1 \pmod 6$）
+        这与 $N \equiv -1 \pmod 6$ 矛盾。
+        
+        因此，$N$ 必须至少有一个形如 $6k-1$ 的素因子，设为 $p$。
+        
+        我们证明 $p$ 不等于 $p_1, p_2, \ldots, p_r$ 中的任何一个。
+        如果 $p = p_i$ 对于某个 $i \in \{1, 2, \ldots, r\}$ 成立，则 $p_i \mid N$ 且 $p_i \mid 6(p_1 p_2 \cdots p_r)$。
+        因此 $p_i$ 必须整除它们的差，即 $p_i \mid (6(p_1 p_2 \cdots p_r) - N)$，也就是 $p_i \mid 1$。
+        这是不可能的。
+        
+        所以，$p$ 是一个形如 $6k-1$ 的素数，但它不在我们假设的有限列表 $p_1, p_2, \ldots, p_r$ 中。
+        这与我们的初始假设（所有形如 $6n-1$ 的素数都在该列表中）矛盾。
+        
+        因此，假设错误，形如 $6n-1$ 的素数有无限多个。
+        证毕。
+    \end{proof}
+    \item[5] 利用 $\prod_{p \leqslant x}\left(1-\frac{1}{p}\right)^{-1} \leqslant \prod_{K=2}^{\pi(x)+1}\left(1-\frac{1}{K}\right)^{-1}$ ，证明：\\
+    （1）$\pi(x)>\log x-1$ ；\\
+    （2）$p_n<3^{n+1}$（ $p_n$ 为第 $n$ 个素数）．
+    \begin{proof}
+        \begin{enumerate}
+            \item 证明 $\pi(x) > \log x - 1$。\\
+            我们知道对于 $x \ge 1$，有 $\sum_{n \le x} \frac{1}{n} > \log x$。\\
+            同时，我们有
+            \[ \sum_{n \le x} \frac{1}{n} \le \sum_{n \in S_x} \frac{1}{n} = \prod_{p \le x} \left(1 - \frac{1}{p}\right)^{-1} \]
+            其中 $S_x$ 是所有素因子都 $\le x$ 的正整数集合。\\
+            结合上述不等式和题目给出的不等式，得到：
+            \[ \log x < \sum_{n \le x} \frac{1}{n} \le \prod_{p \le x} \left(1 - \frac{1}{p}\right)^{-1} \le \prod_{K=2}^{\pi(x)+1} \left(1 - \frac{1}{K}\right)^{-1} \]
+            计算右侧的乘积：
+            \begin{align*}
+                \prod_{K=2}^{\pi(x)+1} \left(1 - \frac{1}{K}\right)^{-1} &= \prod_{K=2}^{\pi(x)+1} \left(\frac{K-1}{K}\right)^{-1} \\
+                &= \prod_{K=2}^{\pi(x)+1} \frac{K}{K-1} \\
+                &= \frac{2}{1} \cdot \frac{3}{2} \cdot \frac{4}{3} \cdots \frac{\pi(x)+1}{\pi(x)} \\
+                &= \pi(x) + 1
+            \end{align*}
+            因此，我们得到 $\log x < \pi(x) + 1$。\\
+            整理可得 $\pi(x) > \log x - 1$。
+            
+            \item 证明 $p_n < 3^{n+1}$。\\
+            由（1）可知 $\pi(x) > \log x - 1$。\\
+            令 $x = p_n$，其中 $p_n$ 是第 $n$ 个素数。则 $\pi(x) = \pi(p_n) = n$。\\
+            代入不等式，得到：
+            \[ n > \log p_n - 1 \]
+            整理得：
+            \[ \log p_n < n + 1 \]
+            两边取指数（以自然对数底 $e$）：
+            \[ p_n < e^{n+1} \]
+            由于 $e \approx 2.718 < 3$，我们有 $e^{n+1} < 3^{n+1}$。\\
+            因此，
+            \[ p_n < 3^{n+1} \]
+            证毕。
+        \end{enumerate}
+    \end{proof}
+
+\end{enumerate}
+
+\subsection*{第四章}
+
+\begin{enumerate}
+    \item[1] 若 $a_1 \equiv b_1(\bmod m), a_2 \equiv b_2(\bmod m)$, 则
+    $$
+    a_1 a_2 \equiv b_1 b_2(\bmod m) .
+    $$
+
+    \begin{proof}
+        由题设 $a_1 \equiv b_1 \pmod m$ 和 $a_2 \equiv b_2 \pmod m$，根据同余的定义，可知 $m \mid (a_1 - b_1)$ 且 $m \mid (a_2 - b_2)$。
+        因此，存在整数 $k_1, k_2$ 使得
+        \[ a_1 - b_1 = mk_1 \]
+        \[ a_2 - b_2 = mk_2 \]
+        即 $a_1 = b_1 + mk_1$ 且 $a_2 = b_2 + mk_2$。
+        
+        考察 $a_1 a_2 - b_1 b_2$：
+        \begin{align*}
+            a_1 a_2 - b_1 b_2 &= (b_1 + mk_1)(b_2 + mk_2) - b_1 b_2 \\
+            &= b_1 b_2 + b_1 mk_2 + b_2 mk_1 + m^2 k_1 k_2 - b_1 b_2 \\
+            &= m(b_1 k_2 + b_2 k_1 + mk_1 k_2)
+        \end{align*}
+        由于 $b_1, k_2, b_2, k_1, m$ 均为整数，所以 $b_1 k_2 + b_2 k_1 + mk_1 k_2$ 也是整数。
+        因此，$m \mid (a_1 a_2 - b_1 b_2)$。
+        根据同余的定义，有
+        \[ a_1 a_2 \equiv b_1 b_2 \pmod m \]
+        证毕。
+    \end{proof}
+    
+    \item[2] 若 $C \equiv d(\bmod m),(C, m)=1$ ，则
+    $$
+    a C \equiv b d(\bmod m)
+    $$
+    与
+    $$
+    a \equiv b(\bmod m)
+    $$
+    等价。
+
+    \begin{proof}
+        ($\Longrightarrow$) 假设 $a \equiv b \pmod m$。
+        由题设 $C \equiv d \pmod m$。
+        根据上一题的结论（同余式的乘法性质），将 $a \equiv b \pmod m$ 与 $C \equiv d \pmod m$ 两式相乘，得到：
+        \[ a C \equiv b d \pmod m \]
+        
+        ($\Longleftarrow$) 假设 $a C \equiv b d \pmod m$。
+        由题设 $C \equiv d \pmod m$，可知 $m \mid (C-d)$，即 $d = C - mk$ 对于某个整数 $k$ 成立。
+        将 $d = C - mk$ 代入 $a C \equiv b d \pmod m$：
+        \[ a C \equiv b (C - mk) \pmod m \]
+        \[ a C \equiv b C - bmk \pmod m \]
+        由于 $bmk \equiv 0 \pmod m$，上式简化为：
+        \[ a C \equiv b C \pmod m \]
+        这意味着 $m \mid (a C - b C)$，即 $m \mid (a - b) C$。
+        
+        因为 $\gcd(C, m) = 1$，根据 Euclid 引理，可得 $m \mid (a - b)$。
+        根据同余的定义，有
+        \[ a \equiv b \pmod m \]
+        
+        综上所述，两个同余式等价。
+        证毕。
+    \end{proof}
+    \item[4] 设素数 $p \geqslant 3$ ，若 $a^2 \equiv b^2(\bmod p), p \nmid a$ ，则 $a \equiv b(\bmod p)$ 或 $a \equiv$ $-b(\bmod p)$ 且仅有一个成立．
+
+    \begin{proof}
+        由 $a^2 \equiv b^2 \pmod p$，可得 $a^2 - b^2 \equiv 0 \pmod p$，即
+        \[ (a - b)(a + b) \equiv 0 \pmod p \]
+        因为 $p$ 是素数，根据 Euclid 引理，必有 $p \mid (a - b)$ 或 $p \mid (a + b)$。
+        \begin{itemize}
+            \item 若 $p \mid (a - b)$，则 $a \equiv b \pmod p$。
+            \item 若 $p \mid (a + b)$，则 $a \equiv -b \pmod p$。
+        \end{itemize}
+        因此，至少有 $a \equiv b \pmod p$ 或 $a \equiv -b \pmod p$ 中的一个成立。
+        
+        接下来证明仅有一个成立。假设 $a \equiv b \pmod p$ 和 $a \equiv -b \pmod p$ 同时成立。
+        则 $b \equiv -b \pmod p$，即 $2b \equiv 0 \pmod p$。
+        因为 $p$ 是素数且 $p \ge 3$，所以 $\gcd(2, p) = 1$。
+        根据同余的性质，由 $2b \equiv 0 \pmod p$ 可得 $b \equiv 0 \pmod p$。
+        又因为 $a \equiv b \pmod p$，所以 $a \equiv 0 \pmod p$，即 $p \mid a$。
+        这与题目条件 $p \nmid a$ 矛盾。
+        
+        因此，$a \equiv b \pmod p$ 和 $a \equiv -b \pmod p$ 不能同时成立。
+        
+        综上所述，$a \equiv b \pmod p$ 或 $a \equiv -b \pmod p$ 且仅有一个成立。
+        证毕。
+    \end{proof}
+
+    \item[5] 设正整数
+    $$
+    a=a_n 10^n+a_{n-1} 10^{n-1}+\cdots+a_0, \quad 0 \leqslant a_i<10
+    $$
+    则 11 整除 $a$ 的充要条件是
+    $$
+    11 \mid \sum_{i=1}^n(-1)^i a_i
+    $$
+
+    \begin{proof}
+        考虑整数 $a$ 模 11 的余数。
+        我们注意到 $10 \equiv -1 \pmod{11}$。
+        根据同余的性质，对于任意非负整数 $i$，有
+        \[ 10^i \equiv (-1)^i \pmod{11} \]
+        
+        现在考察 $a$ 模 11：
+        \begin{align*}
+            a &= a_n 10^n + a_{n-1} 10^{n-1} + \cdots + a_1 10^1 + a_0 \\
+            &\equiv a_n (-1)^n + a_{n-1} (-1)^{n-1} + \cdots + a_1 (-1)^1 + a_0 (-1)^0 \pmod{11} \\
+            &\equiv \sum_{i=0}^n a_i (-1)^i \pmod{11}
+        \end{align*}
+        
+        因此，$a \equiv 0 \pmod{11}$ 当且仅当 $\sum_{i=0}^n (-1)^i a_i \equiv 0 \pmod{11}$。
+
+        证毕。
+    \end{proof}
+    \item[6] 试找出整数能被37，101 整除的判别条件来。
+
+    \begin{solution}
+        设整数 $N$ 的十进制表示为 $a_k a_{k-1} \cdots a_1 a_0 = \sum_{i=0}^k a_i 10^i$。
+
+        \textbf{能被 37 整除的判别条件：}
+        我们注意到 $1000 = 27 \times 37 + 1$，因此 $1000 \equiv 1 \pmod{37}$。
+        将整数 $N$ 从右往左每三位分为一组：
+        \[ N = (a_2 a_1 a_0)_{10} + (a_5 a_4 a_3)_{10} \cdot 10^3 + (a_8 a_7 a_6)_{10} \cdot 10^6 + \cdots \]
+        令 $A_0 = (a_2 a_1 a_0)_{10} = 100a_2 + 10a_1 + a_0$，
+        $A_1 = (a_5 a_4 a_3)_{10} = 100a_5 + 10a_4 + a_3$，以此类推。
+        则 $N = A_0 + A_1 \cdot 10^3 + A_2 \cdot (10^3)^2 + \cdots$。
+        考虑 $N$ 模 37：
+        \begin{align*}
+            N &\equiv A_0 + A_1 \cdot 1 + A_2 \cdot 1^2 + \cdots \pmod{37} \\
+            &\equiv A_0 + A_1 + A_2 + \cdots \pmod{37}
+        \end{align*}
+        因此，一个整数能被 37 整除的充要条件是：将其从右往左每三位分为一组，这些组所表示的数之和能被 37 整除。
+
+        \textbf{能被 101 整除的判别条件：}
+        我们注意到 $100 = 1 \times 101 - 1$，因此 $100 \equiv -1 \pmod{101}$。
+        将整数 $N$ 从右往左每两位分为一组：
+        \[ N = (a_1 a_0)_{10} + (a_3 a_2)_{10} \cdot 10^2 + (a_5 a_4)_{10} \cdot 10^4 + \cdots \]
+        令 $B_0 = (a_1 a_0)_{10} = 10a_1 + a_0$，
+        $B_1 = (a_3 a_2)_{10} = 10a_3 + a_2$，以此类推。
+        则 $N = B_0 + B_1 \cdot 10^2 + B_2 \cdot (10^2)^2 + \cdots$。
+        考虑 $N$ 模 101：
+        \begin{align*}
+            N &\equiv B_0 + B_1 \cdot (-1) + B_2 \cdot (-1)^2 + B_3 \cdot (-1)^3 + \cdots \pmod{101} \\
+            &\equiv B_0 - B_1 + B_2 - B_3 + \cdots \pmod{101}
+        \end{align*}
+        因此，一个整数能被 101 整除的充要条件是：将其从右往左每两位分为一组，这些组所表示的数的交错和（从右往左，符号为 $+ - + - \cdots$）能被 101 整除。
+    \end{solution}
+\end{enumerate}
