@@ -1,0 +1,379 @@
+\section{第五周作业}
+\subsection*{第四章}
+
+
+\begin{enumerate}
+    \item[7] 试证： $641 \mid\left(2^{32}+1\right)$ ．
+    \begin{proof}
+        注意到 $641 = 5 \cdot 2^7 + 1 = 5^4 + 2^4$。
+        由 $641 = 5 \cdot 2^7 + 1$，可得
+        \[ 5 \cdot 2^7 \equiv -1 \pmod{641} \]
+        两边取 4 次方，得
+        \[ (5 \cdot 2^7)^4 \equiv (-1)^4 \pmod{641} \]
+        \[ 5^4 \cdot 2^{28} \equiv 1 \pmod{641} \]
+        又由 $641 = 5^4 + 2^4$，可得
+        \[ 5^4 \equiv -2^4 \pmod{641} \]
+        代入上式，得
+        \[ (-2^4) \cdot 2^{28} \equiv 1 \pmod{641} \]
+        \[ -2^{32} \equiv 1 \pmod{641} \]
+        即
+        \[ 2^{32} \equiv -1 \pmod{641} \]
+        因此，$2^{32} + 1 \equiv 0 \pmod{641}$，即 $641 \mid (2^{32}+1)$。
+    \end{proof}
+    \item[8] 若 $a$ 是一奇数，则 $a^{2^n} \equiv 1\left(\bmod 2^{n+2}\right), \quad n \geqslant 1$ ．
+    \begin{proof}
+        用数学归纳法证明。
+        \begin{enumerate}
+            \item[奠基] 当 $n=1$ 时，需证 $a^{2^1} \equiv 1 \pmod{2^{1+2}}$，即 $a^2 \equiv 1 \pmod 8$。
+            因为 $a$ 是奇数，设 $a=2k+1$，其中 $k$ 为整数。
+            \[ a^2 = (2k+1)^2 = 4k^2+4k+1 = 4k(k+1)+1 \]
+            由于 $k(k+1)$ 必为偶数，设 $k(k+1)=2j$，其中 $j$ 为整数。
+            则 $a^2 = 4(2j)+1 = 8j+1 \equiv 1 \pmod 8$。
+            故当 $n=1$ 时命题成立。
+            \item[归纳] 假设当 $n=k$ ($k \ge 1$) 时命题成立，即 $a^{2^k} \equiv 1 \pmod{2^{k+2}}$。
+            这意味着存在整数 $c$，使得 $a^{2^k} = 1 + c \cdot 2^{k+2}$。
+            需要证明当 $n=k+1$ 时命题也成立，即 $a^{2^{k+1}} \equiv 1 \pmod{2^{(k+1)+2}}$，即 $a^{2^{k+1}} \equiv 1 \pmod{2^{k+3}}$。
+            \begin{align*}
+                a^{2^{k+1}} &= (a^{2^k})^2 \\
+                &= (1 + c \cdot 2^{k+2})^2 \\
+                &= 1 + 2 \cdot (c \cdot 2^{k+2}) + (c \cdot 2^{k+2})^2 \\
+                &= 1 + c \cdot 2^{k+3} + c^2 \cdot 2^{2(k+2)} \\
+                &= 1 + c \cdot 2^{k+3} + c^2 \cdot 2^{2k+4}
+            \end{align*}
+            因为 $k \ge 1$，所以 $2k+4 = (k+3) + (k+1) \ge k+3+2 = k+5$。
+            因此 $2^{k+3} \mid c^2 \cdot 2^{2k+4}$。
+            故
+            \[ a^{2^{k+1}} \equiv 1 + c \cdot 2^{k+3} \pmod{2^{k+3}} \]
+            \[ a^{2^{k+1}} \equiv 1 \pmod{2^{k+3}} \]
+            当 $n=k+1$ 时命题成立。
+        \end{enumerate}
+        由数学归纳法原理，原命题对所有 $n \ge 1$ 成立。
+    \end{proof}
+    \item[9] 证明：
+    $$
+    x=u+p^{s-t} v, \quad u=0,1,2, \cdots, p^{s-t}-1, \quad v=0,1,2, \cdots, p^t-1, \quad t \leqslant s
+    $$
+    是模 $p^s$（ $p$ 为素数）的一个完全剩余系。
+    \begin{proof}
+        首先，计算 $x$ 的可能取值的个数。
+        $u$ 有 $p^{s-t}$ 个可能的取值。
+        $v$ 有 $p^t$ 个可能的取值。
+        因此，$x$ 的可能取值总数为 $p^{s-t} \cdot p^t = p^s$ 个。这与模 $p^s$ 的完全剩余系的元素个数相同。
+        接下来，证明这些值两两关于模 $p^s$ 不同余。
+        假设存在两组 $(u_1, v_1)$ 和 $(u_2, v_2)$，其中 $0 \le u_1, u_2 < p^{s-t}$ 且 $0 \le v_1, v_2 < p^t$，使得
+        \[ u_1 + p^{s-t} v_1 \equiv u_2 + p^{s-t} v_2 \pmod{p^s} \]
+        这意味着
+        \[ (u_1 - u_2) + p^{s-t} (v_1 - v_2) \equiv 0 \pmod{p^s} \]
+        由此可知 $p^s \mid (u_1 - u_2) + p^{s-t} (v_1 - v_2)$。
+        这也意味着
+        \[ (u_1 - u_2) + p^{s-t} (v_1 - v_2) \equiv 0 \pmod{p^{s-t}} \]
+        因为 $ p^{s-t} (v_1 - v_2) \equiv 0 \pmod{p^{s-t}}$，所以
+        \[ u_1 - u_2 \equiv 0 \pmod{p^{s-t}} \]
+        即 $p^{s-t} \mid (u_1 - u_2)$。
+        又因为 $0 \le u_1, u_2 < p^{s-t}$，所以 $-(p^{s-t}) < u_1 - u_2 < p^{s-t}$。
+        满足 $p^{s-t} \mid (u_1 - u_2)$ 的唯一可能是 $u_1 - u_2 = 0$，即 $u_1 = u_2$。
+        将 $u_1 = u_2$ 代入原同余式 $(u_1 - u_2) + p^{s-t} (v_1 - v_2) \equiv 0 \pmod{p^s}$，得到
+        \[ p^{s-t} (v_1 - v_2) \equiv 0 \pmod{p^s} \]
+        这意味着存在整数 $k$，使得 $p^{s-t} (v_1 - v_2) = k \cdot p^s$。
+        两边同除以 $p^{s-t}$（由于 $t \le s$, $s-t \ge 0$），得到
+        \[ v_1 - v_2 = k \cdot p^s / p^{s-t} = k \cdot p^t \]
+        这意味着 $p^t \mid (v_1 - v_2)$。
+        又因为 $0 \le v_1, v_2 < p^t$，所以 $-p^t < v_1 - v_2 < p^t$。
+        满足 $p^t \mid (v_1 - v_2)$ 的唯一可能是 $v_1 - v_2 = 0$，即 $v_1 = v_2$。
+        因此，如果 $u_1 + p^{s-t} v_1 \equiv u_2 + p^{s-t} v_2 \pmod{p^s}$，则必有 $u_1 = u_2$ 且 $v_1 = v_2$。
+        这说明该集合中的 $p^s$ 个数两两关于模 $p^s$ 不同余。
+        综上所述，该集合构成模 $p^s$ 的一个完全剩余系。
+    \end{proof}
+    \item[10] \begin{enumerate}
+        \item 若 $2 \nmid m$ ，则 $2,4,6, \cdots, 2 m$ 是 $m$ 的完全剩余系；
+        \item 若 $m>2$ ，则 $1^2, 2^2, 3^2, \cdots, m^2$ 不是 $m$ 的完全剩余系．
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item 集合为 $S = \{2k \mid 1 \le k \le m\}$。该集合包含 $m$ 个整数。
+            我们需要证明这 $m$ 个整数关于模 $m$ 两两不同余。
+            假设存在 $1 \le k_1, k_2 \le m$，使得 $2k_1 \equiv 2k_2 \pmod m$。
+            则 $m \mid (2k_1 - 2k_2)$，即 $m \mid 2(k_1 - k_2)$。
+            因为 $m$ 是奇数，所以 $\gcd(2, m) = 1$。
+            根据同余的性质，可以约去因子 2，得到
+            \[ k_1 \equiv k_2 \pmod m \]
+            即 $m \mid (k_1 - k_2)$。
+            又因为 $1 \le k_1, k_2 \le m$，所以 $|k_1 - k_2| < m$。
+            满足 $m \mid (k_1 - k_2)$ 的唯一可能是 $k_1 - k_2 = 0$，即 $k_1 = k_2$。
+            因此，集合 $S$ 中的 $m$ 个整数关于模 $m$ 两两不同余。
+            由于集合大小为 $m$，它构成模 $m$ 的一个完全剩余系。
+            \item 考虑集合 $T = \{k^2 \mid 1 \le k \le m\}$。
+            我们需要证明当 $m>2$ 时，这个集合中的数并非关于模 $m$ 两两不同余。
+            考虑 $k=1$ 和 $k=m-1$。因为 $m>2$，所以 $m-1 \ge 2$，且 $1 \ne m-1$。它们都是 $\{1, 2, \dots, m\}$ 中的不同元素。
+            计算它们的平方模 $m$：
+            \[ 1^2 = 1 \equiv 1 \pmod m \]
+            \[ (m-1)^2 = m^2 - 2m + 1 \]
+            因为 $m^2 \equiv 0 \pmod m$ 且 $-2m \equiv 0 \pmod m$，所以
+            \[ (m-1)^2 \equiv 0 - 0 + 1 \equiv 1 \pmod m \]
+            因此，我们找到了两个不同的整数 $1$ 和 $m-1$ ($1 \le 1, m-1 \le m$)，它们的平方关于模 $m$ 同余。
+            这意味着集合 $T$ 中至少有两个元素是相同的（模 $m$），所以它不能包含 $m$ 个两两不同余的数。
+            故 $1^2, 2^2, \cdots, m^2$ 不是模 $m$ 的完全剩余系。
+        \end{enumerate}
+    \end{proof}
+    \item[11] 若 $m_1, m_2, \cdots, m_k$ 两两互素，$x_1, x_2, \cdots, x_k$ 分别通过模 $m_1, m_2, \cdots, m_k$的完全剩余系，则
+    $$
+    x = x_1+m_1 x_2+m_1 m_2 x_3+\cdots+m_1 m_2 \cdots m_{k-1} x_k
+    $$
+    通过模 $m_1 m_2 \cdots m_k$ 的完全剩余系．
+    \begin{proof}
+        令 $M = m_1 m_2 \cdots m_k$。
+        首先，计算 $x$ 的可能取值的个数。
+        $x_1$ 有 $m_1$ 个可能的取值。
+        $x_2$ 有 $m_2$ 个可能的取值。
+        ...
+        $x_k$ 有 $m_k$ 个可能的取值。
+        由于 $x_i$ 的选择是独立的， $x$ 的总取值个数为 $m_1 m_2 \cdots m_k = M$ 个。这与模 $M$ 的完全剩余系的元素个数相同。
+        接下来，证明这些值两两关于模 $M$ 不同余。
+        假设存在两组 $(x_1, x_2, \dots, x_k)$ 和 $(x'_1, x'_2, \dots, x'_k)$，其中 $x_i, x'_i$ 分别是模 $m_i$ 的完全剩余系的代表元，使得
+        \begin{align*}
+        &x_1+m_1 x_2+m_1 m_2 x_3+\cdots+m_1 \cdots m_{k-1} x_k \\
+        \equiv &x'_1+m_1 x'_2+m_1 m_2 x'_3+\cdots+m_1 \cdots m_{k-1} x'_k \pmod M
+        \end{align*}
+        记此同余式为 $(*)$。
+        因为 $m_1 \mid M$，所以上述同余式也意味着模 $m_1$ 同余：
+        \begin{align*}
+        &x_1+m_1 x_2+\cdots+m_1 \cdots m_{k-1} x_k \\
+        \equiv &x'_1+m_1 x'_2+\cdots+m_1 \cdots m_{k-1} x'_k \pmod{m_1}
+        \end{align*}
+        由于 $m_1 x_2, m_1 m_2 x_3, \dots$ 都是 $m_1$ 的倍数，它们模 $m_1$ 都同余于 0。
+        所以 $x_1 \equiv x'_1 \pmod{m_1}$。
+        因为 $x_1, x'_1$ 都来自模 $m_1$ 的一个完全剩余系，所以 $x_1 = x'_1$。
+        将 $x_1 = x'_1$ 代入 $(*)$ 并消去，得到
+        \begin{align*}
+        &m_1 x_2+m_1 m_2 x_3+\cdots+m_1 \cdots m_{k-1} x_k \\
+        \equiv &m_1 x'_2+m_1 m_2 x'_3+\cdots+m_1 \cdots m_{k-1} x'_k \pmod M
+        \end{align*}
+        两边同除以 $m_1$ （这是允许的，因为 $M = m_1 (m_2 \cdots m_k)$），得到
+        \begin{align*}
+        &x_2+m_2 x_3+\cdots+m_2 \cdots m_{k-1} x_k \\
+        \equiv &x'_2+m_2 x'_3+\cdots+m_2 \cdots m_{k-1} x'_k \pmod{m_2 \cdots m_k}
+        \end{align*}
+        记此同余式为 $(**)$。
+        因为 $m_2 \mid (m_2 \cdots m_k)$，所以上述同余式也意味着模 $m_2$ 同余：
+        \[ x_2 + m_2 x_3 + \dots \equiv x'_2 + m_2 x'_3 + \dots \pmod{m_2} \]
+        \[ x_2 \equiv x'_2 \pmod{m_2} \]
+        因为 $x_2, x'_2$ 都来自模 $m_2$ 的一个完全剩余系，所以 $x_2 = x'_2$。
+        我们可以继续这个过程。假设我们已经证明了 $x_1 = x'_1, x_2 = x'_2, \dots, x_{j-1} = x'_{j-1}$。
+        将这些代入 $(*)$ 并消去相应的项，然后两边同除以 $m_1 m_2 \cdots m_{j-1}$，我们得到
+        \begin{align*}
+        &x_j+m_j x_{j+1}+\cdots+m_j \cdots m_{k-1} x_k \\
+        \equiv &x'_j+m_j x'_{j+1}+\cdots+m_j \cdots m_{k-1} x'_k \pmod{m_j m_{j+1} \cdots m_k}
+        \end{align*}
+        考虑模 $m_j$，得到
+        \[ x_j \equiv x'_j \pmod{m_j} \]
+        因为 $x_j, x'_j$ 都来自模 $m_j$ 的一个完全剩余系，所以 $x_j = x'_j$。
+        通过归纳，我们可以证明对所有的 $j=1, 2, \dots, k$，都有 $x_j = x'_j$。
+        因此，如果两个 $x$ 值关于模 $M$同余，那么它们必定是由完全相同的 $(x_1, \dots, x_k)$ 序列生成的。
+        这证明了由不同序列生成的 $M$ 个 $x$ 值两两关于模 $M$ 不同余。
+        综上所述，这些 $x$ 值构成了模 $M$ 的一个完全剩余系。
+    \end{proof}
+    \item[22] 判断下列同余方程是否有解，若有解求其解：
+    \begin{enumerate}
+        \item $20 x \equiv 4(\bmod 30)$ ；
+        \item $15 x \equiv 25(\bmod 35)$ ；
+        \item $15 x \equiv 0(\bmod 35)$ ．
+    \end{enumerate}
+    \begin{solution}
+        线性同余方程 $ax \equiv b \pmod m$ 有解当且仅当 $\gcd(a, m) \mid b$。若有解，则恰有 $\gcd(a, m)$ 个模 $m$ 的互不同余解。
+        \begin{enumerate}
+            \item $20 x \equiv 4 \pmod{30}$。
+            计算 $\gcd(20, 30) = 10$。
+            因为 $10 \nmid 4$，所以该同余方程无解。
+            \item $15 x \equiv 25 \pmod{35}$。
+            计算 $\gcd(15, 35) = 5$。
+            因为 $5 \mid 25$，所以该同余方程有解，且恰有 5 个模 35 的互不同余解。
+            原方程等价于 $15x = 25 + 35k$ 对于某个整数 $k$。
+            两边同除以 $\gcd(15, 35)=5$：
+            \[ 3x \equiv 5 \pmod{7} \]
+            为解此方程，我们需要找到 3 模 7 的逆元。
+            观察可知 $3 \times 5 = 15 \equiv 1 \pmod 7$。所以 3 的逆元是 5。
+            用 5 乘以上述同余式两边：
+            \[ 5 \cdot (3x) \equiv 5 \cdot 5 \pmod 7 \]
+            \[ 15x \equiv 25 \pmod 7 \]
+            \[ x \equiv 4 \pmod 7 \]
+            所以解的形式为 $x = 4 + 7t$，其中 $t$ 是整数。
+            这些解在模 35 下为：
+            当 $t=0$ 时，$x = 4$。
+            当 $t=1$ 时，$x = 4 + 7 = 11$。
+            当 $t=2$ 时，$x = 4 + 14 = 18$。
+            当 $t=3$ 时，$x = 4 + 21 = 25$。
+            当 $t=4$ 时，$x = 4 + 28 = 32$。
+            当 $t=5$ 时，$x = 4 + 35 = 39 \equiv 4 \pmod{35}$，开始重复。
+            因此，解为 $x \equiv 4, 11, 18, 25, 32 \pmod{35}$。
+            \item $15 x \equiv 0 \pmod{35}$。
+            计算 $\gcd(15, 35) = 5$。
+            因为 $5 \mid 0$，所以该同余方程有解，且恰有 5 个模 35 的互不同余解。
+            原方程等价于 $15x = 35k$ 对于某个整数 $k$。
+            两边同除以 $\gcd(15, 35)=5$：
+            \[ 3x \equiv 0 \pmod{7} \]
+            因为 $\gcd(3, 7) = 1$，我们可以约去 3，得到：
+            \[ x \equiv 0 \pmod 7 \]
+            所以解的形式为 $x = 7t$，其中 $t$ 是整数。
+            这些解在模 35 下为：
+            当 $t=0$ 时，$x = 0$。
+            当 $t=1$ 时，$x = 7$。
+            当 $t=2$ 时，$x = 14$。
+            当 $t=3$ 时，$x = 21$。
+            当 $t=4$ 时，$x = 28$。
+            当 $t=5$ 时，$x = 35 \equiv 0 \pmod{35}$，开始重复。
+            因此，解为 $x \equiv 0, 7, 14, 21, 28 \pmod{35}$。
+        \end{enumerate}
+    \end{solution}
+    \item[23] 解二元一次同余方程组
+    $$
+    \left\{\begin{aligned}
+    x+4 y-29 & \equiv 0(\bmod 143) \\
+    2 x-9 y+84 & \equiv 0(\bmod 143)
+    \end{aligned}\right.
+    $$
+    \begin{solution}
+        将方程组写为标准形式：
+        $$
+        \left\{\begin{aligned}
+        x+4 y & \equiv 29 \pmod{143} \quad &(1) \\
+        2 x-9 y & \equiv -84 \pmod{143} \quad &(2)
+        \end{aligned}\right.
+        $$
+        注意到 $143 = 11 \times 13$。
+        我们可以用消元法。将方程 (1) 乘以 2：
+        \[ 2x + 8y \equiv 58 \pmod{143} \quad (3) \]
+        用方程 (3) 减去方程 (2)：
+        \[ (2x + 8y) - (2x - 9y) \equiv 58 - (-84) \pmod{143} \]
+        \[ 17y \equiv 142 \pmod{143} \]
+        因为 $142 \equiv -1 \pmod{143}$，所以
+        \[ 17y \equiv -1 \pmod{143} \]
+        我们需要解这个关于 $y$ 的线性同余方程。首先计算 $\gcd(17, 143)$。
+        因为 $143 = 11 \times 13$，17 是素数，且 $17 \ne 11, 17 \ne 13$，所以 $\gcd(17, 143) = 1$。
+        这保证了方程有唯一解。我们需要找到 17 模 143 的逆元。
+        使用扩展欧几里得算法：
+        \begin{align*} 143 &= 8 \times 17 + 7 \\ 17 &= 2 \times 7 + 3 \\ 7 &= 2 \times 3 + 1 \end{align*}
+        现在反向代入：
+        \begin{align*} 1 &= 7 - 2 \times 3 \\ &= 7 - 2 \times (17 - 2 \times 7) \\ &= 7 - 2 \times 17 + 4 \times 7 \\ &= 5 \times 7 - 2 \times 17 \\ &= 5 \times (143 - 8 \times 17) - 2 \times 17 \\ &= 5 \times 143 - 40 \times 17 - 2 \times 17 \\ &= 5 \times 143 - 42 \times 17 \end{align*}
+        从 $5 \times 143 - 42 \times 17 = 1$，我们得到 $-42 \times 17 \equiv 1 \pmod{143}$。
+        所以 17 模 143 的逆元是 $-42 \equiv -42 + 143 = 101 \pmod{143}$。
+        将 $17y \equiv -1 \pmod{143}$ 两边乘以 101：
+        \[ 101 \cdot (17y) \equiv 101 \cdot (-1) \pmod{143} \]
+        \[ y \equiv -101 \pmod{143} \]
+        \[ y \equiv -101 + 143 \equiv 42 \pmod{143} \]
+        将 $y=42$ 代入方程 (1)：
+        \[ x + 4(42) \equiv 29 \pmod{143} \]
+        \[ x + 168 \equiv 29 \pmod{143} \]
+        因为 $168 = 143 + 25 \equiv 25 \pmod{143}$，所以
+        \[ x + 25 \equiv 29 \pmod{143} \]
+        \[ x \equiv 29 - 25 \pmod{143} \]
+        \[ x \equiv 4 \pmod{143} \]
+        因此，方程组的解为 $x \equiv 4 \pmod{143}$，$y \equiv 42 \pmod{143}$。
+    \end{solution}
+    \item[25] 判断下列同余方程组是否有解，若有解求其解：
+    \begin{enumerate}
+        \item $x \equiv 1(\bmod 4), \quad x \equiv 0(\bmod 3), \quad x \equiv 5(\bmod 7)$ ；
+        \item $x \equiv 2(\bmod 4), \quad x \equiv 7(\bmod 10), \quad x \equiv 1(\bmod 3)$ ；
+        \item $x \equiv 2(\bmod 3), \quad x \equiv 3(\bmod 5), \quad x \equiv 5(\bmod 2)$ ；
+        \item $x \equiv 3(\bmod 8), \quad x \equiv 11(\bmod 20), \quad x \equiv 1(\bmod 15)$ ．
+    \end{enumerate}
+    \begin{solution}
+        使用中国剩余定理 (CRT)。若模数不互素，则先檢查相容性。
+        \begin{enumerate}
+            \item $x \equiv 1 \pmod 4$, $x \equiv 0 \pmod 3$, $x \equiv 5 \pmod 7$.
+            模数 $m_1=4, m_2=3, m_3=7$ 两两互素。故有唯一解模 $M = 4 \times 3 \times 7 = 84$。
+            $M_1 = M/m_1 = 84/4 = 21$。解 $M_1 y_1 \equiv 1 \pmod{m_1}$，即 $21y_1 \equiv 1 \pmod 4 \implies y_1 \equiv 1 \pmod 4$。取 $y_1=1$。
+            $M_2 = M/m_2 = 84/3 = 28$。解 $M_2 y_2 \equiv 1 \pmod{m_2}$，即 $28y_2 \equiv 1 \pmod 3 \implies y_2 \equiv 1 \pmod 3$。取 $y_2=1$。
+            $M_3 = M/m_3 = 84/7 = 12$。解 $M_3 y_3 \equiv 1 \pmod{m_3}$，即 $12y_3 \equiv 1 \pmod 7 \implies 5y_3 \equiv 1 \pmod 7$。因为 $5 \times 3 = 15 \equiv 1 \pmod 7$，取 $y_3=3$。
+            根据 CRT，解为 $x = a_1 M_1 y_1 + a_2 M_2 y_2 + a_3 M_3 y_3 \pmod M$。
+            \[ x \equiv 1 \cdot 21 \cdot 1 + 0 \cdot 28 \cdot 1 + 5 \cdot 12 \cdot 3 \pmod{84} \]
+            \[ x \equiv 21 + 0 + 180 \pmod{84} \]
+            \[ x \equiv 201 \pmod{84} \]
+            因为 $201 = 2 \times 84 + 33$，所以 $x \equiv 33 \pmod{84}$。
+            \item $x \equiv 2 \pmod 4$, $x \equiv 7 \pmod{10}$, $x \equiv 1 \pmod 3$.
+            模数 4 和 10 不互素，$\gcd(4, 10) = 2$。需要检查相容性。
+            $x \equiv 2 \pmod 4 \implies x$ 是偶数。
+            $x \equiv 7 \pmod{10}$。考虑模 2： $x \equiv 7 \equiv 1 \pmod 2 \implies x$ 是奇数。
+            一个数不能同时是奇数和偶数。这两个条件矛盾。
+            因此，该同余方程组无解。
+            \item $x \equiv 2 \pmod 3$, $x \equiv 3 \pmod 5$, $x \equiv 5 \pmod 2$.
+            最后一个同余式可简化为 $x \equiv 1 \pmod 2$。
+            方程组为 $x \equiv 2 \pmod 3$, $x \equiv 3 \pmod 5$, $x \equiv 1 \pmod 2$.
+            模数 $m_1=3, m_2=5, m_3=2$ 两两互素。故有唯一解模 $M = 3 \times 5 \times 2 = 30$。
+            $M_1 = M/m_1 = 30/3 = 10$。解 $10y_1 \equiv 1 \pmod 3 \implies y_1 \equiv 1 \pmod 3$。取 $y_1=1$。
+            $M_2 = M/m_2 = 30/5 = 6$。解 $6y_2 \equiv 1 \pmod 5 \implies y_2 \equiv 1 \pmod 5$。取 $y_2=1$。
+            $M_3 = M/m_3 = 30/2 = 15$。解 $15y_3 \equiv 1 \pmod 2 \implies y_3 \equiv 1 \pmod 2$。取 $y_3=1$。
+            解为 $x = a_1 M_1 y_1 + a_2 M_2 y_2 + a_3 M_3 y_3 \pmod M$。
+            \[ x \equiv 2 \cdot 10 \cdot 1 + 3 \cdot 6 \cdot 1 + 1 \cdot 15 \cdot 1 \pmod{30} \]
+            \[ x \equiv 20 + 18 + 15 \pmod{30} \]
+            \[ x \equiv 53 \pmod{30} \]
+            因为 $53 = 1 \times 30 + 23$，所以 $x \equiv 23 \pmod{30}$。
+            \item $x \equiv 3 \pmod 8$, $x \equiv 11 \pmod{20}$, $x \equiv 1 \pmod{15}$.
+            模数 8, 20, 15 两两不都互素。
+            $\gcd(8, 20)=4$, $\gcd(8, 15)=1$, $\gcd(20, 15)=5$。
+            需要检查相容性。
+            从 $x \equiv 3 \pmod 8$ 和 $x \equiv 11 \pmod{20}$ 检查 $\gcd(8, 20)=4$。
+            $x \equiv 3 \pmod 8 \implies x \equiv 3 \pmod 4$。
+            $x \equiv 11 \pmod{20} \implies x \equiv 11 \equiv 3 \pmod 4$。
+            这两个条件相容。
+            从 $x \equiv 11 \pmod{20}$ 和 $x \equiv 1 \pmod{15}$ 检查 $\gcd(20, 15)=5$。
+            $x \equiv 11 \pmod{20} \implies x \equiv 11 \equiv 1 \pmod 5$。
+            $x \equiv 1 \pmod{15} \implies x \equiv 1 \pmod 5$。
+            这两个条件相容。
+            从 $x \equiv 3 \pmod 8$ 和 $x \equiv 1 \pmod{15}$ 检查 $\gcd(8, 15)=1$。自动相容。
+            
+            因为所有条件都相容，所以方程组有解。
+            我们可以将原方程组分解为关于素数幂的模：
+            $x \equiv 3 \pmod 8$
+            $x \equiv 11 \pmod{20} \implies x \equiv 11 \pmod 4$ (已包含在 $x \equiv 3 \pmod 8$ 中) 且 $x \equiv 11 \pmod 5 \implies x \equiv 1 \pmod 5$.
+            $x \equiv 1 \pmod{15} \implies x \equiv 1 \pmod 3$ 且 $x \equiv 1 \pmod 5$ (已存在)。
+            简化后的等价方程组为：
+            $x \equiv 3 \pmod 8$
+            $x \equiv 1 \pmod 3$
+            $x \equiv 1 \pmod 5$
+            模数 $m_1=8, m_2=3, m_3=5$ 两两互素。有唯一解模 $M = 8 \times 3 \times 5 = 120$。
+            $M_1 = M/m_1 = 120/8 = 15$。解 $15y_1 \equiv 1 \pmod 8 \implies -y_1 \equiv 1 \pmod 8 \implies y_1 \equiv -1 \equiv 7 \pmod 8$。取 $y_1=7$。
+            $M_2 = M/m_2 = 120/3 = 40$。解 $40y_2 \equiv 1 \pmod 3 \implies y_2 \equiv 1 \pmod 3$。取 $y_2=1$。
+            $M_3 = M/m_3 = 120/5 = 24$。解 $24y_3 \equiv 1 \pmod 5 \implies 4y_3 \equiv 1 \pmod 5 \implies -y_3 \equiv 1 \pmod 5 \implies y_3 \equiv -1 \equiv 4 \pmod 5$。取 $y_3=4$。
+            解为 $x = a_1 M_1 y_1 + a_2 M_2 y_2 + a_3 M_3 y_3 \pmod M$。
+            \[ x \equiv 3 \cdot 15 \cdot 7 + 1 \cdot 40 \cdot 1 + 1 \cdot 24 \cdot 4 \pmod{120} \]
+            \[ x \equiv 315 + 40 + 96 \pmod{120} \]
+            \[ x \equiv 451 \pmod{120} \]
+            因为 $451 = 3 \times 120 + 91$，所以 $x \equiv 91 \pmod{120}$。
+        \end{enumerate}
+    \end{solution}
+    \item[27] 解同余方程组：
+    $$
+    2 x \equiv 3(\bmod 5), \quad 3 x \equiv 1(\bmod 7).
+    $$    
+    \begin{solution}
+        先分别解每一个线性同余方程。
+        第一个方程： $2x \equiv 3 \pmod 5$。
+        我们需要找到 2 模 5 的逆元。 $2 \times 3 = 6 \equiv 1 \pmod 5$。逆元是 3。
+        方程两边乘以 3：
+        \[ 3 \cdot (2x) \equiv 3 \cdot 3 \pmod 5 \]
+        \[ 6x \equiv 9 \pmod 5 \]
+        \[ x \equiv 4 \pmod 5 \]
+        第二个方程： $3x \equiv 1 \pmod 7$。
+        我们需要找到 3 模 7 的逆元。 $3 \times 5 = 15 \equiv 1 \pmod 7$。逆元是 5。
+        方程两边乘以 5：
+        \[ 5 \cdot (3x) \equiv 5 \cdot 1 \pmod 7 \]
+        \[ 15x \equiv 5 \pmod 7 \]
+        \[ x \equiv 5 \pmod 7 \]
+        现在我们需要解联立方程组：
+        $$
+        \left\{\begin{aligned}
+        x & \equiv 4 \pmod 5 \\
+        x & \equiv 5 \pmod 7
+        \end{aligned}\right.
+        $$
+        模数 $m_1=5, m_2=7$ 互素。有唯一解模 $M = 5 \times 7 = 35$。
+        $M_1 = M/m_1 = 35/5 = 7$。解 $7y_1 \equiv 1 \pmod 5 \implies 2y_1 \equiv 1 \pmod 5$。逆元是 3，所以 $y_1=3$。
+        $M_2 = M/m_2 = 35/7 = 5$。解 $5y_2 \equiv 1 \pmod 7$。逆元是 3 ($5 \times 3 = 15 \equiv 1 \pmod 7$)，所以 $y_2=3$。
+        根据 CRT，解为 $x = a_1 M_1 y_1 + a_2 M_2 y_2 \pmod M$。
+        \[ x \equiv 4 \cdot 7 \cdot 3 + 5 \cdot 5 \cdot 3 \pmod{35} \]
+        \[ x \equiv 84 + 75 \pmod{35} \]
+        \[ x \equiv 159 \pmod{35} \]
+        因为 $159 = 4 \times 35 + 19$，所以 $159 \equiv 19 \pmod{35}$。
+        因此，方程组的解为 $x \equiv 19 \pmod{35}$。
+    \end{solution}
+\end{enumerate}

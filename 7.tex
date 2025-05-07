@@ -1,0 +1,437 @@
+\section{第七周作业}
+\subsection*{第五章}
+
+\begin{enumerate}
+    \item[5] 利用上题证明：对任意素数 $p$ ，必有整数 $x$ ，使
+    $$
+    p \mid x^8-16
+    $$
+
+    \begin{proof}
+        若$\left(\frac{2}{p}\right)=1$或$\left(\frac{-2}{p}\right)=1$，则有
+        $$x^2 \equiv 2 \pmod p \text{ 或 } x^2 \equiv -2 \pmod p$$
+        故
+        $$x^8 \equiv 16 \pmod p$$
+        若$\left(\frac{-1}{p}\right)=1$，则有
+        $$t^2 \equiv -1 \pmod p$$
+        设$x=1+t$，有
+        \begin{align*}
+        x^2 &= t^2+2t+1 \equiv 2t \pmod p\\
+        x^4 &\equiv -4 \pmod p\\
+        x^8 &\equiv 16 \pmod p
+        \end{align*}
+    \end{proof}
+
+    \item[6] 证明：同余式 $x^2+1 \equiv 0(\bmod p), p=4 m+1$ 的解是
+    $$
+    x \equiv(2 m)!(\bmod p) .
+    $$
+
+\begin{proof}
+    由Wilson定理，知
+    $$(p-1)! \equiv -1 \pmod p$$
+    即
+\begin{align*}
+[(2m)!]^2 &= 1\times2\times\cdots\times2m\times(-2m)\times\cdots\times(-1)\\
+&= 1\times2\times\cdots\times2m\times(2m+1)\times\cdots\times(4m)\\
+&= (4m)!\\
+&\equiv -1 \pmod p
+\end{align*}
+\end{proof}
+
+    \item[8] 计算：$\left(\frac{-23}{83}\right),\left(\frac{51}{71}\right),\left(\frac{71}{73}\right),\left(\frac{-35}{97}\right)$ ．
+
+\begin{solution}
+    \begin{enumerate}
+        \item 
+        \begin{align*}
+        \left(\frac{-23}{83}\right) &= \left(\frac{-1}{83}\right) \cdot \left(\frac{23}{83}\right)\\
+        &= (-1)^{\frac{83-1}{2}} \cdot (-1) \cdot \left(\frac{83}{23}\right)\\
+        &= \left(\frac{83}{23}\right)\\
+        &= \left(\frac{-9}{23}\right)\\
+        &= \left(\frac{-1}{23}\right) \cdot \left(\frac{9}{23}\right)\\
+        &= (-1)^{\frac{23-1}{2}} \cdot (-1) \cdot \left(\frac{23}{9}\right)\\
+        &= -1 \cdot 1
+        \end{align*}
+        因此 $\left(\frac{-23}{83}\right) = -1$
+
+        \item 
+        \begin{align*}
+        \left(\frac{51}{71}\right) &= \left(\frac{3}{71}\right) \cdot \left(\frac{17}{71}\right)\\
+        &= (-1) \cdot \left(\frac{71}{3}\right) \cdot \left(\frac{71}{17}\right)\\
+        &= (-1) \cdot \left(\frac{2}{3}\right) \cdot \left(\frac{3}{17}\right)\\
+        &= (-1) \cdot (-1)^{\frac{9-1}{8}} \cdot \left(\frac{17}{3}\right)\\
+        &= (-1)  \cdot \left(\frac{2}{3}\right)\\
+        &= -1
+        \end{align*}
+
+        \item 
+        \begin{align*}
+        \left(\frac{71}{73}\right) &= \left(\frac{73}{71}\right)\\
+        &= \left(\frac{2}{71}\right)\\
+        &= (-1)^{\frac{71^2-1}{8}}\\
+        &= 1
+        \end{align*}
+
+        \item 
+        \begin{align*}
+        \left(\frac{-35}{97}\right) &= \left(\frac{-1}{97}\right) \cdot \left(\frac{35}{97}\right)\\
+        &= \left(\frac{-1}{97}\right) \cdot \left(\frac{97}{35}\right)\\
+        &= (-1)^{\frac{97-1}{2}} \cdot (\frac{-1}{35}) \cdot (\frac{2}{35}) \cdot (\frac{4}{35})\\
+        &= (-1)^{\frac{35-1}{2}} \cdot (-1)^{\frac{35^2-1}{8}} \cdot 1 \\
+        &= (-1) \cdot (-1) \cdot 1\\
+        &= 1
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
+    \item[9] 设 $p>3$ 为素数，证明：
+    \begin{enumerate}
+        \item $\left(\frac{3}{p}\right)=1$ 之充要条件为 $p=12 n \pm 1$ ；
+        \item $\left(\frac{-3}{p}\right)=1$ 之充要条件为 $p=6 n+1$ ．
+    \end{enumerate}
+
+\begin{proof}
+    \begin{enumerate}
+        \item \[\left(\frac{3}{p}\right) \left(\frac{p}{3}\right) = (-1)^{\frac{p-1}{2} \frac{3-1}{2}} = (-1)^{\frac{p-1}{2}}\]
+        \text{于是}
+        \[ \left(\frac{3}{p}\right) = (-1)^{\frac{p-1}{2}} \left(\frac{p}{3}\right) \]
+        \text{其中}
+        \begin{align*}
+            \left(\frac{p}{3}\right)=1 &\iff p \equiv 1 \pmod 3 \\
+            \left(\frac{p}{3}\right)=-1 &\iff p \equiv 2 \pmod 3
+        \end{align*}
+        \text{故}
+        \begin{align*}
+            &\left(\frac{3}{p}\right)=1 \\
+            &\iff p \equiv 3 \pmod 4 \land p \equiv 2 \pmod 3 \\
+            &\text{或 } p \equiv 1 \pmod 4 \land p \equiv 1 \pmod 3 \\
+            &\iff p \equiv \pm 1 \pmod{12} \\
+            &\iff p = 12n \pm 1
+        \end{align*}
+        \item 
+        \begin{align*}
+        \left(\frac{-3}{p}\right) &= \left(\frac{-1}{p}\right)\left(\frac{3}{p}\right)\\
+        &= (-1)^{\frac{p-1}{2}} \cdot (-1)^{\frac{p-1}{2}}\left(\frac{p}{3}\right)\\
+        &= (-1)^{p-1} \left(\frac{p}{3}\right)
+        \end{align*}
+
+        于是
+        \begin{align*}
+            \left(\frac{-3}{p}\right) = 1 &\Leftrightarrow p \equiv 1 \pmod{2} \land p \equiv 1 \pmod{3} \\
+            &\lor p \equiv 0 \pmod{2} \land p \equiv 2 \pmod{3} \\
+            &\Leftrightarrow p \equiv 1 \pmod{6} \\
+            &\Leftrightarrow p = 6n+1.
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+    \item[12] 设 $p>2$ 为素数，$(a, p)=1$ ，则
+    $$
+    \sum_{x=1}^p\left(\frac{a x+b}{p}\right)=0 .
+    $$
+
+\begin{proof}
+  $$\sum_{x=1}^p\left(\frac{ax+b}{p}\right) = \sum_{y=1}^p\left(\frac{y}{p}\right) = \frac{p-1}{2} - \frac{p-1}{2} + 0 = 0$$
+\end{proof}
+\end{enumerate}
+
+\subsection*{第六章}
+
+\begin{enumerate}
+    \item[1] 写出模 $3,5,11,13,19$ 的指数表，并指出它们的所有原根．
+
+\begin{solution}
+    \begin{enumerate}
+        \item $3$ 的指数表
+        
+        $(\mathbb{Z}/3\mathbb{Z})^*$ 的元素 $a$ 及其阶 $\operatorname{ord}_3(a)$ 如下：
+            \begin{center}
+            \begin{tabular}{|c|c|}
+            \hline
+            $a=1$ & $a=2$ \\
+            \hline
+            $\operatorname{ord}_3(1)=1$ & $\operatorname{ord}_3(2)=2$ \\
+            \hline
+            \end{tabular}
+            \end{center}
+            原根: 2.
+
+        \item $5$ 的指数表
+
+$(\mathbb{Z}/5\mathbb{Z})^*$ 的元素 $a$ 及其阶 $\operatorname{ord}_5(a)$ 如下：
+            \begin{center}
+            \begin{tabular}{|c|c|c|c|}
+            \hline
+            $a=1$ & $a=2$ & $a=3$ & $a=4$ \\
+            \hline
+            $\operatorname{ord}_5(1)=1$ & $\operatorname{ord}_5(2)=4$ & $\operatorname{ord}_5(3)=4$ & $\operatorname{ord}_5(4)=2$ \\
+            \hline
+            \end{tabular}
+            \end{center}
+            原根: 2, 3.
+
+        \item $11$ 的指数表
+        
+$(\mathbb{Z}/11\mathbb{Z})^*$ 的元素 $a$ 及其阶 $\operatorname{ord}_{11}(a)$ 如下：
+            \begin{center}
+            \begin{tabular}{|*{10}{c|}}
+            \hline
+            1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+            \hline
+            1 & 10 & 5 & 5 & 5 & 10 & 10 & 10 & 5 & 2 \\
+            \hline
+            \end{tabular}
+            \end{center}
+            原根: 2, 6, 7, 8.
+
+        \item $13$ 的指数表
+        
+$(\mathbb{Z}/13\mathbb{Z})^*$ 的元素 $a$ 及其阶 $\operatorname{ord}_{13}(a)$ 如下：
+            \begin{center}
+            \begin{tabular}{|*{7}{c|}}
+            \hline
+            1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+            \hline
+            1 & 12 & 3 & 6 & 4 & 12 & 12 \\
+            \hline
+            \end{tabular}
+            \vspace{0.5em} % Optional: space between tables
+            
+            \begin{tabular}{|*{5}{c|}}
+            \hline
+            8 & 9 & 10 & 11 & 12 \\
+            \hline
+            4 & 3 & 6 & 12 & 2 \\
+            \hline
+            \end{tabular}
+            \end{center}
+            原根: 2, 6, 7, 11.
+
+        \item $19$ 的指数表
+
+        $(\mathbb{Z}/19\mathbb{Z})^*$ 的元素 $a$ 及其阶 $\operatorname{ord}_{19}(a)$ 如下：
+            \begin{center}
+            \begin{tabular}{|*{9}{c|}}
+            \hline
+            1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+            \hline
+            1 & 18 & 18 & 9 & 9 & 9 & 3 & 6 & 9 \\
+            \hline
+            \end{tabular}
+            \vspace{0.5em} % Optional: space between tables
+            
+            \begin{tabular}{|*{9}{c|}}
+            \hline
+            10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 \\
+            \hline
+            18 & 3 & 6 & 18 & 18 & 18 & 9 & 9 & 2 \\
+            \hline
+            \end{tabular}
+            \end{center}
+            原根: 2, 3, 10, 13, 14, 15.
+    \end{enumerate}
+\end{solution}
+
+    \item[2] 求 $\delta_{43}(7), \delta_{41}(10).$
+
+    \begin{solution}
+        $\delta_{43}(7) = 6$, $\delta_{41}(10) = 5$
+    \end{solution}
+
+    \item[3] 设 $p$ 为素数，$n \geqslant 1,(n, p-1)=1$ ．证明：当 $x$ 通过模 $p$ 的完全系时，$x^n$亦通过模 $p$ 的完全系。
+
+\begin{proof}
+
+设 $f: (\mathbb{Z}/p\mathbb{Z})^* \longrightarrow (\mathbb{Z}/p\mathbb{Z})^*, \quad x \mapsto x^n$.
+
+即证 $f$ 为双射.
+
+取 $(\mathbb{Z}/p\mathbb{Z})^*$ 的一个原根 $g$, 则
+\[
+f(g^k) = (g^k)^n = g^{kn}
+\]
+由于 $(n, p-1)=1$, 设
+\[
+h: \mathbb{Z}/(p-1)\mathbb{Z} \longrightarrow \mathbb{Z}/(p-1)\mathbb{Z}, \quad k \mapsto kn
+\]
+则 $h \in \text{Aut}(\mathbb{Z}/(p-1)\mathbb{Z})$.
+
+因此, $f$ 为双射. 证毕.
+\end{proof}
+
+    \item[5] 设素数 $p>2$ ，证明：$\delta_p(a)=2$ 的充要条件是 $a \equiv-1(\bmod p).$
+
+\begin{proof}
+    \begin{enumerate}
+        \item \text{``}$\implies$\text{''} \\
+        若 $\delta_p(a) = 2$, 则
+        \begin{align*}
+        a^2 &\equiv 1 \pmod p \\
+        &\iff (a-1)(a+1) \equiv 0 \pmod p \\
+        &\iff p \mid (a-1) \lor p \mid (a+1)
+        \end{align*}
+        若 $p \nmid (a+1)$, 则 $\delta_p(a)=1$, 矛盾, 故
+        \[ p \mid a-1 \]
+        即
+        \[ a \equiv -1 \pmod p \]
+
+        \item \text{``}$\Longleftarrow$\text{''} \\
+        若 $a \equiv -1 \pmod p$, 则
+        \[ a^2 \equiv 1 \pmod p \]
+        故
+        \[ \delta_p(a)=2 \]
+    \end{enumerate}
+\end{proof}
+    
+    \item[9] 设 $n=2^k, k > 3$ ，证明：$\delta_n(a)=2^{k-2}$ 的充要条件是 $a \equiv \pm 3(\bmod 8)$ ．
+
+\begin{proof}
+    对于 $(\mathbb{Z}/2^k\mathbb{Z})^*, k \ge 3$, 有
+    \[ (\mathbb{Z}/2^k\mathbb{Z})^* = \{(-1)^a 5^b \mid a=0,1, 0 \le b < 2^{k-2}\} \]
+    即
+    \[ (\mathbb{Z}/2^k\mathbb{Z})^* \cong C_2 \times C_{2^{k-2}} \]
+    对于 $\forall a \in (\mathbb{Z}/2^k\mathbb{Z})^*$, 设
+    \[ a \equiv (-1)^u 5^v \pmod{2^k} \]
+    其中 $u=0,1, 0 \le v < 2^{k-2}$. \\
+    于是
+    \[ \delta_{2^k}(a) = \left[2^u, \frac{2^{k-2}}{(v, 2^{k-2})}\right] \]
+    \begin{enumerate}
+        \item \text{``}$\implies$\text{''} \\
+        \begin{enumerate}
+            \item 若 $u=0$, 则 $\delta_{2^k}(a) = \frac{2^{k-2}}{(v, 2^{k-2})} = 2^{k-2}$ \\
+            故 $v \equiv 1 \pmod 2$. 
+            \item 若 $u=1$, 则 $\delta_{2^k}(a) = \left[2, \frac{2^{k-2}}{(v, 2^{k-2})}\right] = 2^{k-2}.$ 
+            故 $v \equiv 1 \pmod 2$.
+        \end{enumerate}
+        由于 $v \equiv 1 \pmod 2$, 因此
+        \[ 5^v \equiv 5 \pmod 8 \]
+        于是
+        \[ a \equiv (-1)^u 5^v \equiv (-1)^u 5 \equiv \pm 5 \equiv \pm 3 \pmod 8 \]
+        \item \text{``}$\Longleftarrow$\text{''} \\
+        若 $a \equiv \pm 3 \pmod 8$, 则 $v \equiv 1 \pmod 2$, 于是
+        \[ \delta_{2^k}(a) = \left[2^u, \frac{2^{k-2}}{(v, 2^{k-2})}\right] = \left[2^u, 2^{k-2}\right] = 2^{k-2} \]
+    \end{enumerate}
+    
+\end{proof}
+
+    \item[10] 设 $m>2$ 并有原根存在，证明：
+\begin{enumerate}
+    \item $a$ 是模 $m$ 的二次剩余的充要条件是
+$$
+a^{\varphi(m) / 2} \equiv 1(\bmod m) ;
+$$
+
+    \item 若 $a$ 是 $m$ 的二次剩余，则 $x^2 \equiv a(\bmod m)$ 恰有二解；
+
+    \item 模 $m$ 恰有 $\frac{1}{2} \varphi(m)$ 个二次剩余．
+\end{enumerate}
+
+\begin{proof}
+    设 $g$ 为 $m$ 的一个原根, 则 $(\mathbb{Z}/m\mathbb{Z})^* = \langle g \rangle$.
+        \begin{enumerate}
+            \item 设 $a \equiv g^k \pmod m$, $0 < k \le \varphi(m)$. \\
+            则
+            \begin{align*}
+                & \exists x : x^2 \equiv a \pmod m \\
+                \iff & \exists 0 < j \le \varphi(m) : g^{2j} \equiv g^k \pmod m \\
+                \iff & \exists 0 < j \le \varphi(m) : 2j \equiv k \pmod{\varphi(m)} \\
+                \iff & (2, \varphi(m)) \mid k
+            \end{align*}
+            而 $2 \mid \varphi(m)$, 故 $2 \mid k$. 设 $k=2t$, 于是
+            \[ a^{\frac{\varphi(m)}{2}} \equiv (g^{2t})^{\frac{\varphi(m)}{2}} \equiv g^{t\varphi(m)} \equiv (g^{\varphi(m)})^t \equiv 1 \pmod m \]
+            
+            \item 设 $a = g^{2t}$, $x = g^j \pmod m$ 为其中一解, 则
+            \begin{align*}
+            & x^2 \equiv a \pmod m \\
+            \iff & \exists 0 < j \le \varphi(m) : j \equiv t \pmod{\frac{\varphi(m)}{2}} \\
+            \iff & x \equiv g^j \pmod m \lor x \equiv g^{j+\frac{\varphi(m)}{2}} \pmod m
+            \end{align*}
+            恰有二解.
+            
+            \item 即在 $1, 2, 3, \dots, \varphi(m)$ 中的偶数个数
+            \[ \frac{\varphi(m)}{2} \]
+        \end{enumerate}
+\end{proof}
+
+    \item[11]设素数 $p>2$ ，若 $g$ 为模 $p$ 的原根，且
+$$
+g^{p-1} \equiv 1\left(\bmod p^2\right)
+$$
+则 $g$ 不是 $p^k$ 的原根，$k \geqslant 2$ ．
+
+    \begin{proof}
+        使用反证法.
+
+        若 $g$ 为 $p^k$ 的原根, 则 $g+p$ 亦为 $p^k$ 的原根. $g$ 为 $p$ 的原根. \\
+        若 $g^{p-1} \equiv 1 \pmod{p^2}$, 则
+        \begin{align*}
+        (g+p)^{p-1} &\equiv g^{p-1} + \binom{p-1}{1} g^{p-2} p \pmod{p^2} \\
+        &\equiv 1 + (p-1)g^{p-2}p \pmod{p^2}
+        \end{align*}
+        由于 $p^2 \nmid (p-1)g^{p-2}p$, 故
+        \[ (g+p)^{p-1} \not\equiv 1 \pmod{p^2} \]
+        因此存在 $p^k$ 的原根 $g$ 使之为 $p$ 的原根且 $g^{p-1} \not\equiv 1 \pmod{p^2}$.
+    \end{proof}
+
+
+    \item[12] \begin{enumerate}
+        \item 若 $q=4 k+1, p=2 q+1$ 均为素数，则 2 是 $p$ 的原根；
+        \item 若 $q=2 k+1(k>1), p=2 q+1$ 均为素数，则 $-3,-4$ 均为 $p$ 的原根．
+    \end{enumerate}
+
+\begin{proof}
+    \begin{enumerate}
+        \item 对于 $2^2$, 由于 $p=2q+1 = 8k+3 \ge 11$, 故 $2^2 \not\equiv 1 \pmod p$. % Note: The image has 2^q, not 2^2.
+        
+        而
+        \begin{equation*}
+            2^q \equiv 2^{\frac{p-1}{2}} \equiv \left(\frac{2}{p}\right) \pmod p
+        \end{equation*}
+        其中
+        \begin{equation*}
+            \left(\frac{2}{p}\right) = (-1)^{\frac{p^2-1}{8}} = -1
+        \end{equation*}
+        故
+        \begin{equation*}
+            2^q \not\equiv 1 \pmod p
+        \end{equation*}
+        又由 Lagrange 定理知 $\operatorname{ord}(2) \mid \varphi(p) = 2q$, 故 $\operatorname{ord}(2) = 2q$.
+        
+        故 2 是 $p$ 的原根.
+        \item 
+        \begin{enumerate}
+            \item $-3$ 为 $p$ 的原根. \\
+            对于 $(-3)^2$, 由于 $p=2q+1 = 4k+3 \ge 11$, 故 $(-3)^2 \not\equiv 1 \pmod p$.
+            
+            若 $(-3)^q \equiv (-3)^{\frac{p-1}{2}} \equiv \left(\frac{-3}{p}\right) \equiv 1 \pmod p$,
+            则 $p \equiv 1 \pmod 6$.
+            
+            而 $p = 4k+3 \not\equiv 1 \pmod 6$.
+            
+            故 $\left(\frac{-3}{p}\right) \not\equiv 1 \pmod p$. % Note: This line was split between images.
+            
+            由 Lagrange 定理知 $\operatorname{ord}(-3) \mid \varphi(p)=2q$, 故 $\operatorname{ord}(-3)=2q$.
+            
+            即 $-3$ 为 $p$ 的原根.
+            \item $-4$ 为 $p$ 的原根. \\
+            对于 $(-4)^2$, 由于 $p=2q+1 = 4k+3 \ge 11, \dots$, 故 $(-4)^2 \not\equiv 1 \pmod p$.
+            
+            若 $(-4)^q \equiv (-4)^{\frac{p-1}{2}} \equiv \left(\frac{-4}{p}\right) \equiv 1 \pmod p$.
+            
+            而
+            \begin{align*}
+                \left(\frac{-4}{p}\right) &= \left(\frac{-1}{p}\right) \left(\frac{2}{p}\right)^2 \\ % Note: The image has (2/p)^2, which is (4/p) = 1
+                                      &= (-1)^{\frac{p-1}{2}} \cdot 1 \\
+                                      &= (-1)^q \cdot 1 \\
+                                      &= -1
+            \end{align*}
+            故 $(-4)^q \not\equiv 1 \pmod p$.
+            
+            由 Lagrange 定理知 $\operatorname{ord}(-4) \mid \varphi(p)=2q$, 故 $\operatorname{ord}(-4)=2q$.
+            
+            即 $-4$ 为 $p$ 的原根.
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+\end{enumerate}

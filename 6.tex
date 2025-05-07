@@ -1,0 +1,257 @@
+\section{第六周作业}
+\subsection*{第四章}
+
+\begin{enumerate}
+    \item[13] \begin{enumerate}
+        \item 求 $3^{400}$ 的最后一位数字；
+        \item 求 $\left(12371^{56}+34\right)^{28}$ 被 111 除以后所得的余数．
+    \end{enumerate}
+
+\begin{solution}
+    \begin{enumerate}
+        \item $3^{400} \equiv 3^{4 \times 100} \equiv (3^4)^{100} \equiv 1^{100} \equiv 1 \pmod{10}$
+        
+    故其最后一位数字为1。
+    
+    \item  注意到 $12371 \equiv 111^2 + 50$，因此
+    \begin{equation*}
+        12371 \equiv 50 \pmod{111}
+    \end{equation*}
+    故
+    \begin{equation*}
+        (12371^{56} + 34)^{28} \equiv (50^{56} + 34)^{28} \pmod{111}
+    \end{equation*}
+    我们有
+    \begin{align*}
+    50^2 &\equiv 58 \pmod{111}\\
+    50^4 &\equiv 34 \pmod{111}\\
+    50^8 &\equiv 46 \pmod{111}\\
+    50^{16} &\equiv 7 \pmod{111}\\
+    50^{32} &\equiv 49 \pmod{111}
+    \end{align*}
+    因此
+    \begin{equation*}
+        50^{56} \equiv 50^{32} \times 50^{16} \times 50^8 \equiv 16 \pmod{111}
+    \end{equation*}
+    于是
+    \begin{equation*}
+        (50^{56} + 34)^{28} \equiv 50^{28} \pmod{111}
+    \end{equation*}
+    而
+    \begin{equation*}
+        50^{28} \equiv 50^{16} \times 50^8 \times 50^4 \equiv 70 \pmod{111}
+    \end{equation*}
+    综上，其余数为70。
+    \end{enumerate}
+\end{solution}
+
+    \item[14] \begin{enumerate}
+        \item 求 $3^{400}$ 的最后两位数字；
+        \item 求 $9^{9^9}$ 的最后两位数字．
+    \end{enumerate}
+
+\begin{solution}
+    \begin{enumerate}
+        \item $\phi(100) = \phi(2^2 \times 5^2) = \phi(2^2) \phi(5^2) = (4-2) \times (25-5) = 40$
+        
+    由Euler定理知
+    \begin{equation*}
+        3^{\phi(100)} = 3^{40} \equiv 1 \pmod{100}
+    \end{equation*}
+    于是
+    \begin{equation*}
+        3^{400} \equiv (3^{40})^{10} \equiv 1 \pmod{100}
+    \end{equation*}
+    故其末两位为01.
+    
+    \item 我们有
+    \begin{equation*}
+        9^9 \equiv 9^{2 \times 4+1} \equiv (9^2)^4 \times 9 \equiv (1)^4 \times 9 \equiv 9 \pmod{40}
+    \end{equation*}
+    由Euler定理知
+    \begin{equation*}
+        9^{\phi(100)} = 9^{40} \equiv 1 \pmod{100}
+    \end{equation*}
+    因此
+    \begin{equation*}
+        9^{9^9} \equiv 9^9 \pmod{100}
+    \end{equation*}
+    对 9, 100 进行辗转相除法，有
+    \begin{equation*}
+        9^{-1} \equiv 89 \pmod{100}
+    \end{equation*}
+    而
+    \begin{equation*}
+        9^9 \times 9 = 9^{10} \equiv 1 \pmod{100}
+    \end{equation*}
+    故
+    \begin{equation*}
+        9^9 \equiv 9^{-1} \equiv 89 \pmod{100}
+    \end{equation*}
+    综上，其最后两位数字为89
+    \end{enumerate}
+\end{solution}
+
+    \item[21] 当 $a$ 为何值时 $x^3 \equiv a(\bmod 9)$ 有解．
+    
+\begin{solution}
+    遍历$\mathbb{Z} / 9 \mathbb{Z},$当且仅当 $a \equiv 0, 1, 8 \pmod{9}$ 时该方程有解。
+\end{solution}
+
+    \item[28] 设 $m_1, m_2, \cdots, m_K$ 两两互素，则同余方程组 $a_i x \equiv b_i\left(\bmod m_i\right), 1 \leqslant i \leqslant$ $K$ 有解的充要条件是每一个同余方程 $a_i x \equiv b_i\left(\bmod m_i\right)$ 均可解．
+    
+    \begin{proof}
+        必要性显然，下证充分性。
+        
+        假设 $a_i x \equiv b_i \pmod{m_i}, 1 \leq i \leq k$ 的可解，则
+        \begin{equation*}
+            (a_i, m_i) \mid b_i
+        \end{equation*}
+        令 $d_i = (a_i, m_i)$, $a_i' = \frac{a_i}{d_i}$, $b_i' = \frac{b_i}{d_i}$, $m_i' = \frac{m_i}{d_i}$。
+        
+        则有
+        \begin{equation*}
+            a_i x \equiv b_i \pmod{m_i} \Leftrightarrow a_i' x \equiv b_i' \pmod{m_i'}
+        \end{equation*}
+        由于 $(a_i', m_i') = 1$，故方程有唯一一解
+        \begin{equation*}
+            x \equiv x_{i,0} \pmod{m_i'}
+        \end{equation*}
+        因此，原同余方程组等价于
+        \begin{equation*}
+            \begin{cases}
+                x \equiv x_{1,0} \pmod{m_1'} \\
+                x \equiv x_{2,0} \pmod{m_2'} \\
+                \cdots \\
+                x \equiv x_{k,0} \pmod{m_k'}
+                \end{cases}
+        \end{equation*}
+        对于 $i, j \in \{1, 2, \cdots, k\}; i \neq j$，取素数 $p \mid (m_i', m_j')$，则
+        $p \mid m_i$ 且 $p \mid m_j$，而 $(m_i, m_j) = 1$。故 $p$ 不存在。
+        
+        因此
+        \begin{equation*}
+            (m_i', m_j') = 1, 1 \leq i \neq j \leq k
+        \end{equation*}
+        由中国剩余定理知同余方程组有解。
+    \end{proof}
+
+    \item[29] 设 $(a, b)=1, C>0$ ，证明一定存在整数 $x$ ，使 $(a+b x, C)=1.$
+
+    \begin{proof}
+        证明：对$C$进行素因子分解
+        \begin{equation*}
+            C = p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k}
+        \end{equation*}
+        构造如下的同余方程组
+        \begin{equation*}
+            x \equiv d_i \pmod{p_i}, i=1,2,\cdots,k
+        \end{equation*}
+        其中，
+        \begin{equation*}
+            d_i = \begin{cases}
+                0, & p_i \nmid b \\
+                -a b^{-1} + 1 \pmod{p_i}, & p_i \mid b
+                \end{cases}
+        \end{equation*}
+        由于$p_1, p_2, \cdots, p_k$两两互素，由中国剩余定理知其有唯一解$x_0$。
+
+        由方程组的构造知
+        \begin{equation*}
+            a + b x_0 \not\equiv 0 \pmod{p_i}, i=1,2,\cdots,k
+        \end{equation*}
+        因此
+        \begin{equation*}
+            (a + b x_0, C) = 1
+        \end{equation*}
+    \end{proof}
+\end{enumerate}
+
+\subsection*{第五章}
+
+\begin{enumerate}
+    \item[1] 设整数 $\alpha \geqslant 1, p$ 是奇素数，若 $p^\alpha \nmid a$ ，求
+    $$
+    x^2 \equiv a\left(\bmod p^\alpha\right)
+    $$
+    的一切解．
+
+\begin{solution}
+    (1) 若 $\left(\frac{a}{p}\right) = -1$，则 $x^2 \equiv a \pmod{p}$ 无解，故 $x^2 \equiv a \pmod{p^\alpha}$ 无解。
+        
+    (2) 若 $\left(\frac{a}{p}\right) = 1$，则 $x^2 \equiv a \pmod{p}$ 有解，由Hensel引理知 $x^2 \equiv a \pmod{p^\alpha}$ 恰有两解且在模 $p^\alpha$ 意义下互为相反数。
+    
+    (3) 若 $\left(\frac{a}{p}\right) = 0$，设 $a = p^k b$，其中 $1 \leq k < \alpha$ 且 $p \nmid b$
+    
+    1) 若 $2 \nmid k$，则方程无解。
+    
+    2) 若 $2 \mid k$，设 $k = 2m$，令 $x = p^m y$，则
+    \begin{align*}
+    x^2 &\equiv a \pmod{p^\alpha}\\
+    &\Longleftrightarrow p^{2m} y^2 \equiv p^{2m} b \pmod{p^\alpha}\\
+    &\Longleftrightarrow y^2 \equiv b \pmod{p^{\alpha-2m}}
+    \end{align*}
+    同上，若 $\left(\frac{b}{p}\right) = 1$，则恰有两解，设 $y_0^2 \equiv b \pmod{p^{\alpha-2m}}$，
+    
+    则 $x_1 \equiv p^m y_0 \pmod{p^\alpha}$，$x_2 \equiv p^m(p^{\alpha-2m} - y_0) \pmod{p^\alpha}$。
+    
+    若 $\left(\frac{b}{p}\right) = -1$，则方程无解。
+\end{solution}
+
+    \item[3] 分别写出 $7,13,29,37$ 的全体二次剩余和非剩余．
+
+\begin{solution}
+    \small 
+    \begin{tabular}{|c|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.5cm}|}
+        \hline
+        & 二次剩余 & 二次非剩余 \\
+        \hline
+        7 & 1, 2, 4 & 3, 5, 6 \\
+        \hline
+        13 & 1, 3, 4, 9, 10, 12 & 2, 5, 6, 7, 8, 11 \\
+        \hline
+        29 & 1, 4, 5, 6, 7, 9, 13, 16, 20, 22, 23, 24, 25, 28 & 2, 3, 8, 10, 11, 12, 14, 15, 17, 18, 19, 21, 26, 27 \\
+        \hline
+        37 & 1, 3, 4, 7, 9, 10, 11, 12, 16, 21, 25, 26, 27, 28, 30, 33, 34, 36 & 2, 5, 6, 8, 13, 14, 15, 17, 18, 19, 20, 22, 23, 24, 29, 31, 32, 35 \\
+        \hline
+    \end{tabular}
+\end{solution}
+
+    \item[4] 设 $p>2$ 为奇素数，证明：
+    \begin{enumerate}
+        \item $\left(\frac{-1}{p}\right)=1$ 的充要条件是 $p=4 n+1$ ；
+        \item $\left(\frac{2}{p}\right)=1$ 的充要条件是 $p=8 n \pm 1$ ；
+        \item $\left(\frac{-2}{p}\right)=1$ 的充要条件是 $p=8 n+1,8 n+3$ ；并由此进一步证明对任意素数 $p,-1,-2,2$ 中必有一个是 $p$ 的平方剩余．
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item $\left(\frac{-1}{p}\right) = (-1)^{\frac{p-1}{2}} = 1 \Leftrightarrow p = 4n+1$
+        
+            \item $\left(\frac{2}{p}\right) = (-1)^{\frac{p^2-1}{8}} = 1 \Leftrightarrow p = 8n \pm 1$
+    
+            \item  $\left(\frac{-2}{p}\right) = \left(\frac{-1}{p}\right)\left(\frac{2}{p}\right) = (-1)^{\frac{(p-1)(p+5)}{8}}$
+        
+            $\left(\frac{-2}{p}\right) = 1 \Leftrightarrow p = 8n+1, 8n+3$
+        \end{enumerate} 
+        因此，对于任意奇素数 $p$, $-1, -2, 2$ 中必有一个是 $p$ 的二次剩余。
+    \end{proof}
+
+    \item[7] 设 $x, y$ 为整数，$(x, y)=1$ ，问：$x^2+y^2$ 的大于 2 的素因子一定具有什么形式？$x^2+2 y^2$ 的大于 2 的素因子一定具有什么形式？
+
+\begin{solution}
+    (1)
+\begin{align*}
+    & x^2 \equiv -y^2 \pmod{p}\\
+    &\Leftrightarrow \left(\frac{-1}{p}\right) = 1\\
+    &\Leftrightarrow p = 4n+1
+\end{align*}
+
+(2)
+\begin{align*}
+    & x^2 \equiv -2y^2 \pmod{p}\\
+    &\Leftrightarrow \left(\frac{-2}{p}\right) = 1\\
+    &\Leftrightarrow p = 8n+1, 8n+3
+\end{align*}
+\end{solution}
+\end{enumerate}
